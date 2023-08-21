@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   // * Variables
@@ -12,11 +12,15 @@ export default function Home() {
 
   // * States
 
+  type SnakeDirectionType = "Left" | "Right" | "Up" | "Down";
+
   const [foodPosition, setFoodPosition] = useState({
     x: totalGridSize / 2 - 5,
     y: totalGridSize / 2,
   });
   const [snakePosition, setSnakePosition] = useState(initialSnakePosition);
+  const [snakeDirections, setSnakeDirections] =
+    useState<SnakeDirectionType>("Left");
 
   // * Functions
   function renderGrid() {
@@ -55,6 +59,47 @@ export default function Home() {
 
     return cellArray;
   }
+
+  function updateGame() {
+    let newSnakePosition = [...snakePosition];
+
+    switch (snakeDirections) {
+      case "Left":
+        newSnakePosition.unshift({
+          x: newSnakePosition[0].x,
+          y: newSnakePosition[0].y - 1,
+        });
+        break;
+      case "Right":
+        newSnakePosition.unshift({
+          x: newSnakePosition[0].x,
+          y: newSnakePosition[0].y + 1,
+        });
+        break;
+      case "Up":
+        newSnakePosition.unshift({
+          x: newSnakePosition[0].x + 1,
+          y: newSnakePosition[0].y,
+        });
+        break;
+      case "Down":
+        newSnakePosition.unshift({
+          x: newSnakePosition[0].x - 1,
+          y: newSnakePosition[0].y,
+        });
+        break;
+    }
+    newSnakePosition.pop();
+    setSnakePosition(newSnakePosition);
+  }
+
+  useEffect(() => {
+
+    let interval = setInterval(updateGame, 500)
+
+    return () => clearInterval(interval)
+
+  }, [snakePosition])
 
   return (
     <main className="flex bg-gray-800 min-h-screen flex-col justify-start items-center p-24">
