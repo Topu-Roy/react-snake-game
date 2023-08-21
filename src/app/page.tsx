@@ -29,7 +29,10 @@ export default function Home() {
 
         // * Checking if the current cell should render the food or snake
         let isFoodHere = foodPosition.x === row && foodPosition.y === col;
-        let isSnakeHere = snakePosition.some(
+        let isSnakeHeadHere =
+          snakePosition[0].x === row && snakePosition[0].y === col;
+
+        let isSnakeBodyHere = snakePosition.some(
           (item) => item.x === row && item.y === col
         );
 
@@ -38,8 +41,11 @@ export default function Home() {
           className = `${className} bg-green-500`;
         }
 
-        if (isSnakeHere) {
+        if (isSnakeHeadHere) {
           className = `${className} bg-red-500`;
+        }
+        if (isSnakeBodyHere) {
+          className = `${className} bg-gray-700`;
         }
 
         let cell = <div className={className} key={`${row}+${col}`} />;
