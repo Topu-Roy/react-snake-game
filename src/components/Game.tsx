@@ -1,20 +1,26 @@
 "use client";
+
 import { initialSnakePosition, snakeSpeed, totalGridSize } from "@/constants/constants";
+import { RenderGrid } from "@/functions/functions";
 import { useEffect, useState } from "react";
+import ShowScore from "./ShowScore";
+
+//* type for this component
+type SnakeDirectionType = "Left" | "Right" | "Up" | "Down" | undefined;
+export type SnakePositionType = { x: number; y: number; }[]
+export type FoodPositionType = { x: number; y: number; }
 
 export default function Game() {
     // * Constants --------------------------------------------------------------------
     let speed: number = snakeSpeed();
 
     // * States -----------------------------------------------------------------------
-    type SnakeDirectionType = "Left" | "Right" | "Up" | "Down" | undefined; //! type for snake direction
-
     const [score, setScore] = useState(0)
-    const [foodPosition, setFoodPosition] = useState({
+    const [foodPosition, setFoodPosition] = useState<FoodPositionType>({
         x: totalGridSize / 2 - 5,
         y: totalGridSize / 2,
     });
-    const [snakePosition, setSnakePosition] = useState(initialSnakePosition);
+    const [snakePosition, setSnakePosition] = useState<SnakePositionType>(initialSnakePosition);
     const [snakeDirection, setSnakeDirection] =
         useState<SnakeDirectionType>(undefined);
 
@@ -27,35 +33,6 @@ export default function Game() {
     if (score > 29) speed = speed - 40
 
     // * Functions ---------------------------------------------------------------------
-    function renderGrid() {
-        type CellType = JSX.Element[];
-        let cellArray: CellType = [];
-
-        for (let row = 0; row < totalGridSize; row++) {
-            for (let col = 0; col < totalGridSize; col++) {
-                let className = "bg-gray-500 w-full h-full";
-
-                // * Checking if the current cell should render the food or snake
-                let isFoodHere = foodPosition.x === row && foodPosition.y === col;
-                let isSnakeHeadHere =
-                    snakePosition[0].x === row && snakePosition[0].y === col;
-
-                let isSnakeBodyHere = snakePosition.some(
-                    (item) => item.x === row && item.y === col
-                );
-
-                // * Rendering the food and snake body
-                if (isFoodHere) className = `${className} bg-green-500`;
-                if (isSnakeHeadHere) className = `${className} bg-red-500`;
-                if (isSnakeBodyHere) className = `${className} bg-gray-700`;
-
-                let cell = <div className={className} key={`${row}+${col}`} />;
-                cellArray.push(cell);
-            }
-        }
-
-        return cellArray;
-    }
 
     function reRenderFood() {
         let xPosition = Math.floor(Math.random() * totalGridSize)
@@ -94,7 +71,6 @@ export default function Game() {
             if (snakeDirection !== undefined) newSnakePosition.pop();
         }
 
-
         setSnakePosition(newSnakePosition);
     }
 
@@ -102,10 +78,10 @@ export default function Game() {
 
     useEffect(() => {
         // * Update the snake position
-        let interval = setInterval(updateGame, speed);
+        let interval = snakeDirection !== undefined ? setInterval(updateGame, speed) : undefined;
         return () => clearInterval(interval);
 
-    }, [snakePosition]);
+    }, [snakePosition, snakeDirection]);
 
     useEffect(() => {
         // * Detect the key press to change the direction of the snake
@@ -126,14 +102,13 @@ export default function Game() {
 
         });
     }, []);
+
     return (
         <div>
-            <p>
-                Score: <span>{score}</span>
-            </p>
+            <ShowScore score={score} />
             {/* Snake Board */}
             <div className="h-32 w-32 grid Grid_Custom_Classes gap-[1px]">
-                {renderGrid()}
+                {RenderGrid(totalGridSize, snakePosition, foodPosition)}
             </div>
         </div>
     );

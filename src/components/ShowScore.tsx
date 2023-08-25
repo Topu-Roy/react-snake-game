@@ -1,10 +1,6 @@
 'use client'
-import React from 'react'
-
-function ShowScore() {
+export default function ShowScore(score: { score: number }) {
     return (
-        <span>{0}</span>
+        <span className='text-white font-semibold text-lg'>Score: {score.score}</span>
     )
 }
-
-export default ShowScore
