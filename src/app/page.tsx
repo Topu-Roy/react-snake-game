@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 export default function Home() {
   // * Variables ----------------------------------------------------
   let totalGridSize = 20;
-  const snakeSpeed = 500;
+  let snakeSpeed = 320;
+
 
   let initialSnakePosition = [
     { x: totalGridSize / 2, y: totalGridSize / 2 },
@@ -15,6 +16,7 @@ export default function Home() {
 
   type SnakeDirectionType = "Left" | "Right" | "Up" | "Down" | undefined;
 
+  const [score, setScore] = useState(0)
   const [foodPosition, setFoodPosition] = useState({
     x: totalGridSize / 2 - 5,
     y: totalGridSize / 2,
@@ -22,6 +24,15 @@ export default function Home() {
   const [snakePosition, setSnakePosition] = useState(initialSnakePosition);
   const [snakeDirection, setSnakeDirection] =
     useState<SnakeDirectionType>(undefined);
+
+
+  // ! Increase the snake speed according to current score
+  if (score > 4) snakeSpeed = 290
+  if (score > 9) snakeSpeed = 260
+  if (score > 14) snakeSpeed = 230
+  if (score > 19) snakeSpeed = 200
+  if (score > 24) snakeSpeed = 170
+  if (score > 29) snakeSpeed = 150
 
   // * Functions -------------------------------------------------
   function renderGrid() {
@@ -54,6 +65,13 @@ export default function Home() {
     return cellArray;
   }
 
+  function reRenderFood() {
+    let xPosition = Math.floor(Math.random() * totalGridSize)
+    let yPosition = Math.floor(Math.random() * totalGridSize)
+
+    setFoodPosition({ x: xPosition, y: yPosition })
+  }
+
   function updateGame() {
     let newSnakePosition = [...snakePosition];
 
@@ -74,12 +92,23 @@ export default function Home() {
       y: newSnakePosition[0].y + 1,
     });
 
+    let isFoodEaten = newSnakePosition[0].x === foodPosition.x && newSnakePosition[0].y === foodPosition.y;
 
-    if (snakeDirection !== undefined) newSnakePosition.pop();
+    if (isFoodEaten) {
+      setScore(prev => prev + 1)
+      reRenderFood()
+    }
+    else {
+      if (snakeDirection !== undefined) newSnakePosition.pop();
+    }
+
+
     setSnakePosition(newSnakePosition);
   }
 
-  // * UseEffects -----------------------------------------------
+
+  //! UseEffects -----------------------------------------------
+
   useEffect(() => {
     // * Update the snake position
     let interval = setInterval(updateGame, snakeSpeed);
@@ -114,7 +143,7 @@ export default function Home() {
   return (
     <main className="flex bg-gray-800 min-h-screen flex-col justify-start items-center p-24">
       <p>
-        Score: <span>0</span>
+        Score: <span>{score}</span>
       </p>
 
       {/* Snake Board */}
