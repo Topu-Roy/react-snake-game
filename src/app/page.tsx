@@ -138,8 +138,6 @@ export default function Home() {
     });
   }, []);
 
-  useEffect(() => { console.log(snakeDirection) }, [snakeDirection])
-
   return (
     <main className="flex bg-gray-800 min-h-screen flex-col justify-start items-center p-24">
       <p>
