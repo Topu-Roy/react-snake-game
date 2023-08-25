@@ -3,13 +3,11 @@ import { initialSnakePosition, snakeSpeed, totalGridSize } from "@/constants/con
 import { useEffect, useState } from "react";
 
 export default function Game() {
-
+    // * Constants --------------------------------------------------------------------
     let speed: number = snakeSpeed();
 
-
-    // * States -----------------------------------------------------
-
-    type SnakeDirectionType = "Left" | "Right" | "Up" | "Down" | undefined;
+    // * States -----------------------------------------------------------------------
+    type SnakeDirectionType = "Left" | "Right" | "Up" | "Down" | undefined; //! type for snake direction
 
     const [score, setScore] = useState(0)
     const [foodPosition, setFoodPosition] = useState({
@@ -20,9 +18,7 @@ export default function Game() {
     const [snakeDirection, setSnakeDirection] =
         useState<SnakeDirectionType>(undefined);
 
-
-
-    // ! Increase the snake speed according to current score
+    // ! Increase the snake speed according to current score ---------------------------
     if (score > 4) speed = speed - 40
     if (score > 9) speed = speed - 40
     if (score > 14) speed = speed - 40
@@ -30,7 +26,7 @@ export default function Game() {
     if (score > 24) speed = speed - 40
     if (score > 29) speed = speed - 40
 
-    // * Functions -------------------------------------------------
+    // * Functions ---------------------------------------------------------------------
     function renderGrid() {
         type CellType = JSX.Element[];
         let cellArray: CellType = [];
@@ -102,15 +98,11 @@ export default function Game() {
         setSnakePosition(newSnakePosition);
     }
 
-    //! UseEffects -----------------------------------------------
+    //! UseEffects --------------------------------------------------------------------------
 
     useEffect(() => {
         // * Update the snake position
         let interval = setInterval(updateGame, speed);
-
-
-        console.log(speed)
-
         return () => clearInterval(interval);
 
     }, [snakePosition]);
@@ -119,7 +111,6 @@ export default function Game() {
         // * Detect the key press to change the direction of the snake
         document.addEventListener("keydown", (e) => {
             let key = e.key;
-
 
             // ! This caused the direction to set to the opposite direction
             // if (key === "ArrowUp") setSnakeDirection((prev: SnakeDirectionType) => { if (prev === "Right" || "Left" || undefined) return "Up" })
@@ -133,10 +124,8 @@ export default function Game() {
             if (key === "ArrowLeft") setSnakeDirection((prev: SnakeDirectionType) => (prev !== "Right" ? "Left" : prev));
             if (key === "ArrowRight") setSnakeDirection((prev: SnakeDirectionType) => (prev !== "Left" ? "Right" : prev));
 
-
         });
     }, []);
-
     return (
         <div>
             <p>
