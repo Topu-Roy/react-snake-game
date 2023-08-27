@@ -1,7 +1,6 @@
 "use client";
 
 import { initialSnakePosition, snakeSpeed, totalGridSize } from "@/constants/constants";
-import { RenderGrid } from "@/functions/functions";
 import { useEffect, useState } from "react";
 import ShowScore from "./ShowScore";
 
@@ -39,6 +38,35 @@ export default function Game() {
         let yPosition = Math.floor(Math.random() * totalGridSize)
 
         setFoodPosition({ x: xPosition, y: yPosition })
+    }
+
+    function RenderGrid() {
+        type CellType = JSX.Element[];
+        let cellArray: CellType = [];
+
+        for (let row = 0; row < totalGridSize; row++) {
+            for (let col = 0; col < totalGridSize; col++) {
+                let className = "bg-gray-500 w-full h-full";
+
+                // * Checking if the current cell should render the food or snake
+                let isFoodHere = foodPosition.x === row && foodPosition.y === col;
+                let isSnakeHeadHere =
+                    snakePosition[0].x === row && snakePosition[0].y === col;
+
+                let isSnakeBodyHere = snakePosition.some(
+                    (item) => item.x === row && item.y === col
+                );
+
+                // * Rendering the food and snake body
+                if (isFoodHere) className = `${className} bg-green-500`;
+                if (isSnakeHeadHere) className = `${className} bg-red-500`;
+                if (isSnakeBodyHere) className = `${className} bg-gray-700`;
+
+                let cell = <div className={className} key={`${row}+${col}`} />;
+                cellArray.push(cell);
+            }
+        }
+        return cellArray;
     }
 
     function updateGame() {
@@ -108,7 +136,7 @@ export default function Game() {
             <ShowScore score={score} />
             {/* Snake Board */}
             <div className="h-32 w-32 grid Grid_Custom_Classes gap-[1px]">
-                {RenderGrid(totalGridSize, snakePosition, foodPosition)}
+                {RenderGrid()}
             </div>
         </div>
     );
