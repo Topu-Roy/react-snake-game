@@ -1,6 +1,5 @@
 "use client";
 
-import { initialSnakePosition, snakeSpeed, totalGridSize } from "@/constants/constants";
 import { useEffect, useState } from "react";
 import ShowScore from "./ShowScore";
 
@@ -10,15 +9,24 @@ export type SnakePositionType = { x: number; y: number; }[]
 export type FoodPositionType = { x: number; y: number; }
 
 export default function Game() {
-    // * Constants --------------------------------------------------------------------
-    let speed: number = snakeSpeed();
+    // * Variables ----------------------------------------------------
+    let totalGridSize = 20;
+    let speed = 320;
+
+    let initialSnakePosition = [
+        { x: totalGridSize / 2, y: totalGridSize / 2 },
+        { x: totalGridSize / 2 + 1, y: totalGridSize / 2 },
+    ];
+
+    let initialFoodPosition = {
+        x: totalGridSize / 2 - 5,
+        y: totalGridSize / 2,
+    };
+
 
     // * States -----------------------------------------------------------------------
     const [score, setScore] = useState(0)
-    const [foodPosition, setFoodPosition] = useState<FoodPositionType>({
-        x: totalGridSize / 2 - 5,
-        y: totalGridSize / 2,
-    });
+    const [foodPosition, setFoodPosition] = useState<FoodPositionType>(initialFoodPosition);
     const [snakePosition, setSnakePosition] = useState<SnakePositionType>(initialSnakePosition);
     const [snakeDirection, setSnakeDirection] =
         useState<SnakeDirectionType>(undefined);
@@ -47,6 +55,9 @@ export default function Game() {
         for (let row = 0; row < totalGridSize; row++) {
             for (let col = 0; col < totalGridSize; col++) {
                 let className = "bg-gray-500 w-full h-full";
+
+
+                if (snakePosition[0].x > 20 || snakePosition[0].x < 0 || snakePosition[0].y > 20 || snakePosition[0].y < 0) { gameOver(); }
 
                 // * Checking if the current cell should render the food or snake
                 let isFoodHere = foodPosition.x === row && foodPosition.y === col;
@@ -102,13 +113,22 @@ export default function Game() {
         setSnakePosition(newSnakePosition);
     }
 
+    function gameOver() {
+        console.log('gameOver');
+        setSnakePosition(initialSnakePosition)
+        setFoodPosition(initialFoodPosition)
+        setSnakeDirection(undefined)
+
+        setScore(0)
+    }
+
     //! UseEffects --------------------------------------------------------------------------
 
     useEffect(() => {
         // * Update the snake position
         let interval = snakeDirection !== undefined ? setInterval(updateGame, speed) : undefined;
-        return () => clearInterval(interval);
 
+        return () => clearInterval(interval);
     }, [snakePosition, snakeDirection]);
 
     useEffect(() => {
