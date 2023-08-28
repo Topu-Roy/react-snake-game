@@ -136,6 +136,7 @@ export default function Game() {
         setSnakePosition(newSnakePosition);
     }
 
+
     function gameOver() {
         console.log('gameOver');
         setSnakePosition(initialSnakePosition)
