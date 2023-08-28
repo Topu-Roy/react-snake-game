@@ -69,9 +69,9 @@ export default function Game() {
                 );
 
                 // * Rendering the food and snake body
-                if (isFoodHere) className = `${className} bg-green-500`;
-                if (isSnakeHeadHere) className = `${className} bg-red-500`;
-                if (isSnakeBodyHere) className = `${className} bg-gray-700`;
+                if (isFoodHere) className = "w-full h-full bg-green-500";
+                if (isSnakeHeadHere) className = "w-full h-full bg-red-500";
+                if (isSnakeBodyHere) className = "w-full h-full bg-gray-700";
 
                 let cell = <div className={className} key={`${row}+${col}`} />;
                 cellArray.push(cell);
@@ -109,6 +109,7 @@ export default function Game() {
         else {
             if (snakeDirection !== undefined) newSnakePosition.pop();
         }
+
 
         setSnakePosition(newSnakePosition);
     }
