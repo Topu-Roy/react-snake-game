@@ -9,7 +9,5 @@
 }
 
 .snake_head {
-  background-color: red;
-  height: 100%;
-  width: 100%;
+  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 100% 100%, 0 100%, 0% 50%);
 }

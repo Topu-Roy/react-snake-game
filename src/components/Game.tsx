@@ -16,6 +16,7 @@ export default function Game() {
     let initialSnakePosition = [
         { x: totalGridSize / 2, y: totalGridSize / 2 },
         { x: totalGridSize / 2 + 1, y: totalGridSize / 2 },
+        { x: totalGridSize / 2 + 2, y: totalGridSize / 2 },
     ];
 
     let initialFoodPosition = {
@@ -50,10 +51,9 @@ export default function Game() {
     function RenderGrid() {
         type CellType = JSX.Element[];
         let cellArray: CellType = [];
-
+        let className = "";
         for (let row = 0; row < totalGridSize; row++) {
             for (let col = 0; col < totalGridSize; col++) {
-                let className = "bg-gray-100 w-full h-full";
 
 
                 if (snakePosition[0].x > 20 || snakePosition[0].x < 0 || snakePosition[0].y > 20 || snakePosition[0].y < 0) { gameOver(); }
@@ -62,11 +62,35 @@ export default function Game() {
                 let isFoodHere = foodPosition.x === row && foodPosition.y === col;
                 let isSnakeHeadHere = snakePosition[0].x === row && snakePosition[0].y === col;
                 let isSnakeBodyHere = snakePosition.some((item) => item.x === row && item.y === col);
+                //! let isSnakeTailHere = snakePosition[snakePosition.length - 1].x === row && snakePosition[snakePosition.length - 1].y === col;
 
                 // * Rendering the food and snake body
-                if (isFoodHere) className = "w-full h-full bg-green-500";
-                if (isSnakeHeadHere) className = 'snake_head';
-                if (isSnakeBodyHere) className = "w-full h-full bg-gray-700";
+                if (isFoodHere) className = "w-full h-full bg-green-500 rounded-full";
+                else if (isSnakeHeadHere) {
+
+                    // * The head points to the same direction as it's way
+                    if (snakeDirection === 'Down') {
+                        className = "bg-red-500 w-full h-full rounded-md snake_head rotate-180";
+                    } else if (snakeDirection === 'Left') {
+                        className = "bg-red-500 w-full h-full rounded-md snake_head -rotate-90 ";
+                    } else if (snakeDirection === 'Right') {
+                        className = "bg-red-500 w-full h-full rounded-md snake_head rotate-90";
+                    } else {
+                        className = "bg-red-500 w-full h-full rounded-md snake_head";
+                    }
+                }
+                else if (isSnakeBodyHere) className = "w-full h-full bg-yellow-500 rounded-md "
+                // todo: Can't find a way to render snake tail
+                // else if (isSnakeTailHere) {
+                //     className = "w-full h-full bg-blue-500 rounded-xl relative flex justify-center items-center";
+                //     cellArray.push(
+                //         <div className={className} key={`${row}+${col}`}>
+                //             <div className=" bg-yellow-600 scale-50 ">
+                //             </div>
+                //         </div>
+                //     );
+                // }
+                else className = "bg-gray-400 w-full h-full rounded-full opacity-5"
 
                 let cell = <div className={className} key={`${row}+${col}`} />;
                 cellArray.push(cell);
