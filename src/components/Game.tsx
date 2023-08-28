@@ -56,7 +56,11 @@ export default function Game() {
             for (let col = 0; col < totalGridSize; col++) {
 
 
-                if (snakePosition[0].x > 20 || snakePosition[0].x < 0 || snakePosition[0].y > 20 || snakePosition[0].y < 0) { gameOver(); }
+                // * If the snake hit the wall , then the game should over
+                if (snakePosition[0].x > 20 || snakePosition[0].x < 0 || snakePosition[0].y > 20 || snakePosition[0].y < 0) gameOver();
+
+                // * If the snake head is same as any of the segments of its body , then the game is over
+                if (snakePosition.slice(1).some(item => item.x === snakePosition[0].x && item.y === snakePosition[0].y)) gameOver()
 
                 // * Checking if the current cell should render the food or snake
                 let isFoodHere = foodPosition.x === row && foodPosition.y === col;
@@ -90,7 +94,7 @@ export default function Game() {
                 //         </div>
                 //     );
                 // }
-                else className = "bg-gray-400 w-full h-full rounded-full opacity-5"
+                else className = "bg-gray-400/70 w-full h-full rounded-full opacity-5"
 
                 let cell = <div className={className} key={`${row}+${col}`} />;
                 cellArray.push(cell);
@@ -126,9 +130,10 @@ export default function Game() {
             setScore(prev => prev + 1)
             makeFood()
 
-            // * if snake head is overlapping with the food, add it to the snake body
-
-            newSnakePosition.unshift({ x: foodPosition.x, y: foodPosition.y })
+            // * if snake head is overlapping with the food, add it to the end of snake body
+            // * if added on the start, the head and the body are the same for a few milliseconds
+            // * for that the gameOver function will be called immediately
+            newSnakePosition.push({ x: foodPosition.x, y: foodPosition.y })
         }
         snakeDirection !== undefined && newSnakePosition.pop()
 
@@ -190,7 +195,7 @@ export default function Game() {
         <div>
             <ShowScore score={score} />
             {/* Snake Board */}
-            <div className="h-32 w-32 grid Grid_Custom_Classes gap-[1px]">
+            <div className="grid Grid_Custom_Classes gap-[1px] border-[6px] border-gray-700/75 p-2 rounded-xl">
                 {RenderGrid()}
             </div>
         </div>
