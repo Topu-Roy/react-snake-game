@@ -7,3 +7,9 @@
   grid-template-rows: repeat(20, 30px);
   width: max-content;
 }
+
+.snake_head {
+  background-color: red;
+  height: 100%;
+  width: 100%;
+}

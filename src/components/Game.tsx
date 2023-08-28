@@ -28,8 +28,7 @@ export default function Game() {
     const [score, setScore] = useState(0)
     const [foodPosition, setFoodPosition] = useState<FoodPositionType>(initialFoodPosition);
     const [snakePosition, setSnakePosition] = useState<SnakePositionType>(initialSnakePosition);
-    const [snakeDirection, setSnakeDirection] =
-        useState<SnakeDirectionType>(undefined);
+    const [snakeDirection, setSnakeDirection] = useState<SnakeDirectionType>(undefined);
 
     // ! Increase the snake speed according to current score ---------------------------
     if (score > 4) speed = speed - 40
@@ -41,7 +40,7 @@ export default function Game() {
 
     // * Functions ---------------------------------------------------------------------
 
-    function reRenderFood() {
+    function makeFood() {
         let xPosition = Math.floor(Math.random() * totalGridSize)
         let yPosition = Math.floor(Math.random() * totalGridSize)
 
@@ -54,23 +53,19 @@ export default function Game() {
 
         for (let row = 0; row < totalGridSize; row++) {
             for (let col = 0; col < totalGridSize; col++) {
-                let className = "bg-gray-500 w-full h-full";
+                let className = "bg-gray-100 w-full h-full";
 
 
                 if (snakePosition[0].x > 20 || snakePosition[0].x < 0 || snakePosition[0].y > 20 || snakePosition[0].y < 0) { gameOver(); }
 
                 // * Checking if the current cell should render the food or snake
                 let isFoodHere = foodPosition.x === row && foodPosition.y === col;
-                let isSnakeHeadHere =
-                    snakePosition[0].x === row && snakePosition[0].y === col;
-
-                let isSnakeBodyHere = snakePosition.some(
-                    (item) => item.x === row && item.y === col
-                );
+                let isSnakeHeadHere = snakePosition[0].x === row && snakePosition[0].y === col;
+                let isSnakeBodyHere = snakePosition.some((item) => item.x === row && item.y === col);
 
                 // * Rendering the food and snake body
                 if (isFoodHere) className = "w-full h-full bg-green-500";
-                if (isSnakeHeadHere) className = "w-full h-full bg-red-500";
+                if (isSnakeHeadHere) className = 'snake_head';
                 if (isSnakeBodyHere) className = "w-full h-full bg-gray-700";
 
                 let cell = <div className={className} key={`${row}+${col}`} />;
@@ -100,15 +95,18 @@ export default function Game() {
             y: newSnakePosition[0].y + 1,
         });
 
+        // * Check if snake head is overlapping with the food
         let isFoodEaten = newSnakePosition[0].x === foodPosition.x && newSnakePosition[0].y === foodPosition.y;
 
         if (isFoodEaten) {
             setScore(prev => prev + 1)
-            reRenderFood()
+            makeFood()
+
+            // * if snake head is overlapping with the food, add it to the snake body
+
+            newSnakePosition.unshift({ x: foodPosition.x, y: foodPosition.y })
         }
-        else {
-            if (snakeDirection !== undefined) newSnakePosition.pop();
-        }
+        snakeDirection !== undefined && newSnakePosition.pop()
 
 
         setSnakePosition(newSnakePosition);
@@ -125,17 +123,18 @@ export default function Game() {
 
     //! UseEffects --------------------------------------------------------------------------
 
+    // * This useEffect is to update the game in every given amount of time
     useEffect(() => {
-        // * Update the snake position
-        let interval = snakeDirection !== undefined ? setInterval(updateGame, speed) : undefined;
+        const interval = setInterval(updateGame, speed);
 
         return () => clearInterval(interval);
-    }, [snakePosition, snakeDirection]);
+    }, [snakePosition]);
 
+
+    // * This useEffect is to change the snake direction.
     useEffect(() => {
-        // * Detect the key press to change the direction of the snake
-        document.addEventListener("keydown", (e) => {
-            let key = e.key;
+        const handleKeyPress = (e: KeyboardEvent) => {
+            const key = e.key;
 
             // ! This caused the direction to set to the opposite direction
             // if (key === "ArrowUp") setSnakeDirection((prev: SnakeDirectionType) => { if (prev === "Right" || "Left" || undefined) return "Up" })
@@ -143,14 +142,24 @@ export default function Game() {
             // if (key === "ArrowLeft") setSnakeDirection((prev: SnakeDirectionType) => { if (prev === "Up" || "Down" || undefined) return "Left" })
             // if (key === "ArrowRight") setSnakeDirection((prev: SnakeDirectionType) => { if (prev === "Up" || "Down" || undefined) return "Right" })
 
-            // ! This is the right way to set snake direction
-            if (key === "ArrowUp") setSnakeDirection((prev: SnakeDirectionType) => (prev !== "Down" ? "Up" : prev));
-            if (key === "ArrowDown") setSnakeDirection((prev: SnakeDirectionType) => (prev !== "Up" ? "Down" : prev));
-            if (key === "ArrowLeft") setSnakeDirection((prev: SnakeDirectionType) => (prev !== "Right" ? "Left" : prev));
-            if (key === "ArrowRight") setSnakeDirection((prev: SnakeDirectionType) => (prev !== "Left" ? "Right" : prev));
+            // * This is the correct way to change the snake direction
+            if (key === "ArrowUp") setSnakeDirection((prev) => (prev !== "Down" ? "Up" : prev));
+            if (key === "ArrowDown") setSnakeDirection((prev) => (prev !== "Up" ? "Down" : prev));
+            if (key === "ArrowLeft") setSnakeDirection((prev) => (prev !== "Right" ? "Left" : prev));
+            if (key === "ArrowRight") setSnakeDirection((prev) => (prev !== "Left" ? "Right" : prev));
+        };
 
-        });
+        document.addEventListener("keydown", handleKeyPress);
+
+        return () => document.removeEventListener("keydown", handleKeyPress);
     }, []);
+
+    //! After any change of the direction state, the game lags and stops for a few milliseconds.
+    //! to prevent this, i render the game one more time when the game is stopped, 
+    //! so it doesn't feel like it's not moving
+    useEffect(() => {
+        if (snakeDirection !== undefined) updateGame()
+    }, [snakeDirection]);
 
     return (
         <div>
