@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useScoreStore, useAttemptsStore } from "@/zustand/useZustandStore";
+import Heading from "./Heading";
 
 //* type for this component
 type SnakeDirectionType = "Left" | "Right" | "Up" | "Down" | undefined;
@@ -108,7 +109,7 @@ export default function Game() {
 
                 let cell = <div className={className} key={`${row}+${col}`} >
                     {isSnakeHeadHere ? (
-                        <svg width="30" height="30" viewBox="0 0 238 238" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg className="h-[20px] w-[20px] sm:h-[30px] sm:w-[30px]" width="30" height="30" viewBox="0 0 238 238" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M0.500008 79.5V197.5C0.500005 217.5 26 237.5 48.5 237.5H189.5C212.5 237.5 237.5 217.5 237.5 197V79.5C237.5 59.5 181.5 0.500008 158.5 0.500008H79.5C56.5 0.500008 0.500008 59.5 0.500008 79.5Z" fill="#D93232" stroke="#C95151" />
                             <circle cx="158" cy="78" r="18" fill="#D9D9D9" />
                             <circle cx="80" cy="78" r="18" fill="#D9D9D9" />
@@ -227,7 +228,7 @@ export default function Game() {
     // * to check for 
     useEffect(() => {
         function handleResize() {
-            if (window.innerWidth <= 768) {
+            if (window.innerWidth <= 767) {
                 setIsMobile(true);
             } else {
                 setIsMobile(false);
@@ -243,35 +244,66 @@ export default function Game() {
     }, []);
 
     return (
-        <div className="flex flex-col md:flex-row items-start justify-between gap-4 text-gray-300 font-medium text-normal w-full h-full md:px-8 pt-16">
+        <div className="flex flex-col max-w-7xl xl:flex-row-reverse items-start justify-between gap-4 font-medium text-normal text-slate-500 w-full h-full sm:px-8 pt-4 xl:pt-10">
 
-            <div className="h-full flex-1 bg-gray-700 rounded-lg p-4 md:flex flex-col justify-center items-start hidden">
-                <h3 className="font-bold text-2xl py-2">Statistics:</h3>
-                <div>High Score: <span className="text-lg font-extrabold text-white/60"> {highScore}</span></div>
-                <div>Attempts: <span className="text-lg font-extrabold text-white/60">{attempts}</span></div>
+            {/* score & stats */}
+            <div className="flex justify-center items-center lg:items-start gap-4 xl:flex-col mx-auto">
+
+                <div className="h-[125px] w-[164px] sm:w-[242px] md:w-[310px] bg-gray-700 rounded-lg px-4 flex flex-col justify-start items-start">
+                    <Heading text="Live Score" />
+                    <span>Score: <span className="text-white/60">{score}</span></span>
+                </div>
+
+                <div className="h-[125px] w-[164px] sm:w-[242px] md:w-[310px] bg-gray-700 rounded-lg px-4 flex flex-col ">
+                    <Heading text="Statistics" />
+                    <div>High Score: <span className="  text-white/60"> {highScore}</span></div>
+                    <div>Attempts: <span className=" text-white/60">{attempts}</span></div>
+                </div>
+
             </div>
 
+
             {/* Snake Board */}
-            <div className="flex-1">
+            <div className="flex-1 flex justify-center xl:justify-end items-center mx-auto">
+
                 <div className="grid Grid_Custom_Classes gap-[0.5px] md:gap-[1px] border-[6px] border-gray-700/75 p-[0.5px] rounded-xl">
                     {RenderGrid()}
                 </div>
+
             </div>
 
-            <div className="h-full flex-1 bg-gray-700 rounded-lg p-4 flex flex-col justify-center items-start">
-                <span className="w-10 h-10 bg-red-500">{isMobile ? 'mobile' : 'not mobile'}</span>
+            <div className="md:hidden h-full mx-auto flex-1 bg-gray-700 rounded-lg px-4 flex flex-col justify-center items-start">
                 {/* <div className="h-full flex-1 bg-gray-700 rounded-lg p-4 flex flex-col justify-center items-start"> */}
-                <div>Score: <span className="text-lg font-extrabold text-white/60">{score}</span></div>
+                {/* <div>Score: <span className="text-lg font-extrabold text-white/60">{score}</span></div> */}
 
-                <div className="h-44 w-44 relative bg-orange-300">
-                    <button className="p-1 h-6 bg-slate-800 text-white flex absolute justify-center items-center top-[50%] bottom-[50%] left-0" onClick={() => buttonControl('Left')}>
-                        Left</button>
-                    <button className="p-1 h-6 bg-slate-800 text-white flex absolute justify-center items-center top-0 left-[50%] right-[50%]" onClick={() => buttonControl('Up')}>
-                        top</button>
-                    <button className="p-1 h-6 bg-slate-800 text-white flex absolute justify-center items-center top-[50%] bottom-[50%] right-0" onClick={() => buttonControl('Right')}>
-                        right</button>
-                    <button className="p-1 h-6 bg-slate-800 text-white flex absolute justify-center items-center bottom-0 left-[50%] right-[50%]" onClick={() => buttonControl('Down')}>
-                        bottom</button>
+                <div className=" h-44 w-44 relative bg-orange-300">
+                    <button
+                        className="p-1 h-6 bg-slate-800 text-white flex absolute justify-center items-center top-[50%] bottom-[50%] left-0"
+                        onClick={() => buttonControl('Left')}
+                    >
+                        Left
+                    </button>
+
+                    <button
+                        className="p-1 h-6 bg-slate-800 text-white flex absolute justify-center items-center top-0 left-[50%] right-[50%]"
+                        onClick={() => buttonControl('Up')}
+                    >
+                        top
+                    </button>
+
+                    <button
+                        className="p-1 h-6 bg-slate-800 text-white flex absolute justify-center items-center top-[50%] bottom-[50%] right-0"
+                        onClick={() => buttonControl('Right')}
+                    >
+                        right
+                    </button>
+
+                    <button
+                        className="p-1 h-6 bg-slate-800 text-white flex absolute justify-center items-center bottom-0 left-[50%] right-[50%]"
+                        onClick={() => buttonControl('Down')}
+                    >
+                        bottom
+                    </button>
                 </div>
             </div>
         </div>
