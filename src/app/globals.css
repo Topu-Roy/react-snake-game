@@ -7,3 +7,27 @@
   grid-template-rows: repeat(20, 30px);
   width: max-content;
 }
+
+/* md */
+@media (max-width: 768px) {
+  .Grid_Custom_Classes {
+    grid-template-columns: repeat(16, 21px);
+    grid-template-rows: repeat(16, 21px);
+  }
+}
+
+/* sm */
+@media (min-width: 640px) {
+  .sm\:mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* xl */
+@media (min-width: 1280px) {
+  .xl\:mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

@@ -9,8 +9,16 @@ export type SnakePositionType = { x: number; y: number; }[]
 export type FoodPositionType = { x: number; y: number; }
 
 export default function Game() {
+
+    // get the device width
+    // let width = window.innerWidth
+
+
+
     // * Variables ----------------------------------------------------
+    // let totalGridSize = width > 300 ? 20 : 16;
     let totalGridSize = 20;
+    console.log(totalGridSize)
     let speed = 320;
     let isGameOver = false
 
@@ -62,7 +70,7 @@ export default function Game() {
 
                 if (!isGameOver) {
                     // * If the snake hit the wall , then the game should over
-                    if (snakePosition[0].x > 20 || snakePosition[0].x < 0 || snakePosition[0].y > 20 || snakePosition[0].y < 0) gameOver(), isGameOver = true;
+                    if (snakePosition[0].x > totalGridSize || snakePosition[0].x < 0 || snakePosition[0].y > totalGridSize || snakePosition[0].y < 0) gameOver(), isGameOver = true;
 
                     // * If the snake head is same as any of the segments of its body , then the game is over
                     if (snakePosition.slice(1).some(item => item.x === snakePosition[0].x && item.y === snakePosition[0].y)) gameOver(), isGameOver = true
@@ -172,6 +180,14 @@ export default function Game() {
         resetGame()
     }
 
+    function buttonControl(button: SnakeDirectionType) {
+        // * This is the correct way to change the snake direction
+        if (button === "Up") setSnakeDirection((prev) => (prev !== "Down" ? "Up" : prev));
+        if (button === "Down") setSnakeDirection((prev) => (prev !== "Up" ? "Down" : prev));
+        if (button === "Left") setSnakeDirection((prev) => (prev !== "Right" ? "Left" : prev));
+        if (button === "Right") setSnakeDirection((prev) => (prev !== "Left" ? "Right" : prev));
+    };
+
     //! UseEffects --------------------------------------------------------------------------
 
     // * This useEffect is to update the game in every given amount of time
@@ -213,9 +229,9 @@ export default function Game() {
     }, [snakeDirection]);
 
     return (
-        <div className="flex items-start justify-between gap-4 text-gray-300 font-medium text-normal w-full h-full px-8 pt-16">
+        <div className="flex flex-col md:flex-row items-start justify-between gap-4 text-gray-300 font-medium text-normal w-full h-full md:px-8 pt-16">
 
-            <div className="h-full flex-1 bg-gray-700 rounded-lg p-4 flex flex-col justify-center items-start">
+            <div className="h-full flex-1 bg-gray-700 rounded-lg p-4 md:flex flex-col justify-center items-start hidden">
                 <h3 className="font-bold text-2xl py-2">Statistics:</h3>
                 <div>High Score: <span className="text-lg font-extrabold text-white/60"> {highScore}</span></div>
                 <div>Attempts: <span className="text-lg font-extrabold text-white/60">{attempts}</span></div>
@@ -223,7 +239,7 @@ export default function Game() {
 
             {/* Snake Board */}
             <div className="flex-1">
-                <div className="grid Grid_Custom_Classes gap-[1px] border-[6px] border-gray-700/75 p-2 rounded-xl">
+                <div className="grid Grid_Custom_Classes gap-[0.5px] md:gap-[1px] border-[6px] border-gray-700/75 p-[0.5px] rounded-xl">
                     {RenderGrid()}
                 </div>
             </div>
@@ -231,6 +247,16 @@ export default function Game() {
             <div className="h-full flex-1 bg-gray-700 rounded-lg p-4 flex flex-col justify-center items-start">
                 <div>Score: <span className="text-lg font-extrabold text-white/60">{score}</span></div>
 
+                <div className="h-44 w-44 relative bg-orange-300">
+                    <button className="p-1 h-6 bg-slate-800 text-white flex absolute justify-center items-center top-[50%] bottom-[50%] left-0" onClick={() => buttonControl('Left')}>
+                        Left</button>
+                    <button className="p-1 h-6 bg-slate-800 text-white flex absolute justify-center items-center top-0 left-[50%] right-[50%]" onClick={() => buttonControl('Up')}>
+                        top</button>
+                    <button className="p-1 h-6 bg-slate-800 text-white flex absolute justify-center items-center top-[50%] bottom-[50%] right-0" onClick={() => buttonControl('Right')}>
+                        right</button>
+                    <button className="p-1 h-6 bg-slate-800 text-white flex absolute justify-center items-center bottom-0 left-[50%] right-[50%]" onClick={() => buttonControl('Down')}>
+                        bottom</button>
+                </div>
             </div>
         </div>
     );
