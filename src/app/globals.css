@@ -7,8 +7,3 @@
   grid-template-rows: repeat(20, 30px);
   width: max-content;
 }
-
-.snake_head {
-  /* clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 100% 100%, 0 100%, 0% 50%); */
-  background-image: url("../../public/snake-head.svg");
-}

@@ -80,13 +80,13 @@ export default function Game() {
 
                     // * The head points to the same direction as it's way
                     if (snakeDirection === 'Down') {
-                        className = "w-full h-full rounded-md snake_head rotate-180";
+                        className = "w-full h-full rounded-md rotate-180";
                     } else if (snakeDirection === 'Left') {
-                        className = "w-full h-full rounded-md snake_head -rotate-90 ";
+                        className = "w-full h-full rounded-md -rotate-90 ";
                     } else if (snakeDirection === 'Right') {
-                        className = "w-full h-full rounded-md snake_head rotate-90";
+                        className = "w-full h-full rounded-md rotate-90";
                     } else {
-                        className = "w-full h-full rounded-md snake_head";
+                        className = "w-full h-full rounded-md";
                     }
                 }
                 else if (isSnakeBodyHere) className = "w-full h-full bg-yellow-500 rounded-md "
