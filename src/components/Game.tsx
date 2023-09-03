@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import ShowScore from "./ShowScore";
+import { useScoreStore, useAttemptsStore } from "@/zustand/useZustandStore";
 
 //* type for this component
 type SnakeDirectionType = "Left" | "Right" | "Up" | "Down" | undefined;
@@ -12,6 +13,10 @@ export default function Game() {
     // * Variables ----------------------------------------------------
     let totalGridSize = 20;
     let speed = 320;
+    let isGameOver = false
+
+    const { highScore, updateHighScore } = useScoreStore()
+    const { attempts, updateAttempts } = useAttemptsStore()
 
     let initialSnakePosition = [
         { x: totalGridSize / 2, y: totalGridSize / 2 },
@@ -56,11 +61,13 @@ export default function Game() {
             for (let col = 0; col < totalGridSize; col++) {
 
 
-                // * If the snake hit the wall , then the game should over
-                if (snakePosition[0].x > 20 || snakePosition[0].x < 0 || snakePosition[0].y > 20 || snakePosition[0].y < 0) gameOver();
+                if (!isGameOver) {
+                    // * If the snake hit the wall , then the game should over
+                    if (snakePosition[0].x > 20 || snakePosition[0].x < 0 || snakePosition[0].y > 20 || snakePosition[0].y < 0) gameOver(), isGameOver = true;
 
-                // * If the snake head is same as any of the segments of its body , then the game is over
-                if (snakePosition.slice(1).some(item => item.x === snakePosition[0].x && item.y === snakePosition[0].y)) gameOver()
+                    // * If the snake head is same as any of the segments of its body , then the game is over
+                    if (snakePosition.slice(1).some(item => item.x === snakePosition[0].x && item.y === snakePosition[0].y)) gameOver(), isGameOver = true
+                }
 
                 // * Checking if the current cell should render the food or snake
                 let isFoodHere = foodPosition.x === row && foodPosition.y === col;
@@ -143,12 +150,19 @@ export default function Game() {
 
 
     function gameOver() {
-        console.log('gameOver');
-        setSnakePosition(initialSnakePosition)
-        setFoodPosition(initialFoodPosition)
-        setSnakeDirection(undefined)
+        const saveScores = () => {
+            score > highScore && updateHighScore(score)
+            updateAttempts(1)
+        }
+        const resetGame = () => {
+            setSnakePosition(initialSnakePosition)
+            setFoodPosition(initialFoodPosition)
+            setSnakeDirection(undefined)
+            setScore(0)
+        }
 
-        setScore(0)
+        saveScores()
+        resetGame()
     }
 
     //! UseEffects --------------------------------------------------------------------------
@@ -198,6 +212,8 @@ export default function Game() {
             <div className="grid Grid_Custom_Classes gap-[1px] border-[6px] border-gray-700/75 p-2 rounded-xl">
                 {RenderGrid()}
             </div>
+            <div>High Score: {highScore}</div>
+            <div>Attempts: {attempts}</div>
         </div>
     );
 }
