@@ -244,17 +244,17 @@ export default function Game() {
     }, []);
 
     return (
-        <div className="flex flex-col max-w-7xl xl:flex-row-reverse items-start justify-between gap-4 font-medium text-normal text-slate-500 w-full h-full sm:px-8 pt-4 xl:pt-10">
+        <div className="flex flex-col max-w-7xl xl:flex-row-reverse items-start justify-between gap-4 font-medium text-base xl:text-lg text-slate-500 w-full h-full sm:px-8 pt-4 xl:pt-10">
 
             {/* score & stats */}
             <div className="flex justify-center items-center lg:items-start gap-4 xl:flex-col mx-auto">
 
-                <div className="h-[125px] w-[164px] sm:w-[242px] md:w-[310px] bg-gray-700 rounded-lg px-4 flex flex-col justify-start items-start">
+                <div className="h-[100px] lg:h-[125px] w-[164px] sm:w-[242px] md:w-[310px] bg-gray-700 rounded-lg px-4 flex flex-col justify-start items-start">
                     <Heading text="Live Score" />
                     <span>Score: <span className="text-white/60">{score}</span></span>
                 </div>
 
-                <div className="h-[125px] w-[164px] sm:w-[242px] md:w-[310px] bg-gray-700 rounded-lg px-4 flex flex-col ">
+                <div className="h-[100px] lg:h-[125px] w-[164px] sm:w-[242px] md:w-[310px] bg-gray-700 rounded-lg px-4 flex flex-col ">
                     <Heading text="Statistics" />
                     <div>High Score: <span className="  text-white/60"> {highScore}</span></div>
                     <div>Attempts: <span className=" text-white/60">{attempts}</span></div>
@@ -273,8 +273,6 @@ export default function Game() {
             </div>
 
             <div className="md:hidden h-full mx-auto flex-1 bg-gray-700 rounded-lg px-4 flex flex-col justify-center items-start">
-                {/* <div className="h-full flex-1 bg-gray-700 rounded-lg p-4 flex flex-col justify-center items-start"> */}
-                {/* <div>Score: <span className="text-lg font-extrabold text-white/60">{score}</span></div> */}
 
                 <div className=" h-44 w-44 relative bg-orange-300">
                     <button
