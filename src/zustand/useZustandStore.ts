@@ -14,7 +14,7 @@ type AttemptsStoreType = {
 
 export const useScoreStore = create<
   ScoreStoreType,
-  [["zustand/persist", AttemptsStoreType]]
+  [["zustand/persist", ScoreStoreType]]
 >(
   persist(
     (set) => ({
@@ -23,7 +23,6 @@ export const useScoreStore = create<
     }),
     {
       name: "highScore",
-      getStorage: () => localStorage,
     }
   )
 );
@@ -40,7 +39,6 @@ export const useAttemptsStore = create<
     }),
     {
       name: "Attempts",
-      getStorage: () => localStorage,
     }
   )
 );

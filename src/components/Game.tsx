@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import ShowScore from "./ShowScore";
 import { useScoreStore, useAttemptsStore } from "@/zustand/useZustandStore";
 
 //* type for this component
@@ -206,14 +205,25 @@ export default function Game() {
     }, [snakeDirection]);
 
     return (
-        <div>
-            <ShowScore score={score} />
-            {/* Snake Board */}
-            <div className="grid Grid_Custom_Classes gap-[1px] border-[6px] border-gray-700/75 p-2 rounded-xl">
-                {RenderGrid()}
+        <div className="flex items-start justify-between gap-4 text-gray-300 font-medium text-normal w-full h-full px-8">
+
+            <div className="h-full flex-1 bg-gray-700 rounded-lg p-4 flex flex-col justify-center items-start">
+                <h3 className="font-bold text-2xl py-2">Statistics:</h3>
+                <div>High Score: <span className="text-lg font-extrabold text-white/60"> {highScore}</span></div>
+                <div>Attempts: <span className="text-lg font-extrabold text-white/60">{attempts}</span></div>
             </div>
-            <div>High Score: {highScore}</div>
-            <div>Attempts: {attempts}</div>
+
+            {/* Snake Board */}
+            <div className="flex-1">
+                <div className="grid Grid_Custom_Classes gap-[1px] border-[6px] border-gray-700/75 p-2 rounded-xl">
+                    {RenderGrid()}
+                </div>
+            </div>
+
+            <div className="h-full flex-1 bg-gray-700 rounded-lg p-4 flex flex-col justify-center items-start">
+                <div>Score: <span className="text-lg font-extrabold text-white/60">{score}</span></div>
+
+            </div>
         </div>
     );
 }
