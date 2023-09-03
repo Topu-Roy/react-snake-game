@@ -80,13 +80,13 @@ export default function Game() {
 
                     // * The head points to the same direction as it's way
                     if (snakeDirection === 'Down') {
-                        className = "bg-red-500 w-full h-full rounded-md snake_head rotate-180";
+                        className = "w-full h-full rounded-md snake_head rotate-180";
                     } else if (snakeDirection === 'Left') {
-                        className = "bg-red-500 w-full h-full rounded-md snake_head -rotate-90 ";
+                        className = "w-full h-full rounded-md snake_head -rotate-90 ";
                     } else if (snakeDirection === 'Right') {
-                        className = "bg-red-500 w-full h-full rounded-md snake_head rotate-90";
+                        className = "w-full h-full rounded-md snake_head rotate-90";
                     } else {
-                        className = "bg-red-500 w-full h-full rounded-md snake_head";
+                        className = "w-full h-full rounded-md snake_head";
                     }
                 }
                 else if (isSnakeBodyHere) className = "w-full h-full bg-yellow-500 rounded-md "
@@ -102,7 +102,15 @@ export default function Game() {
                 // }
                 else className = "bg-gray-400/70 w-full h-full rounded-full opacity-5"
 
-                let cell = <div className={className} key={`${row}+${col}`} />;
+                let cell = <div className={className} key={`${row}+${col}`} >
+                    {isSnakeHeadHere ? (
+                        <svg width="30" height="30" viewBox="0 0 238 238" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0.500008 79.5V197.5C0.500005 217.5 26 237.5 48.5 237.5H189.5C212.5 237.5 237.5 217.5 237.5 197V79.5C237.5 59.5 181.5 0.500008 158.5 0.500008H79.5C56.5 0.500008 0.500008 59.5 0.500008 79.5Z" fill="#D93232" stroke="#C95151" />
+                            <circle cx="158" cy="78" r="18" fill="#D9D9D9" />
+                            <circle cx="80" cy="78" r="18" fill="#D9D9D9" />
+                        </svg>
+                    ) : null}
+                </div>
                 cellArray.push(cell);
             }
         }
@@ -205,7 +213,7 @@ export default function Game() {
     }, [snakeDirection]);
 
     return (
-        <div className="flex items-start justify-between gap-4 text-gray-300 font-medium text-normal w-full h-full px-8">
+        <div className="flex items-start justify-between gap-4 text-gray-300 font-medium text-normal w-full h-full px-8 pt-16">
 
             <div className="h-full flex-1 bg-gray-700 rounded-lg p-4 flex flex-col justify-center items-start">
                 <h3 className="font-bold text-2xl py-2">Statistics:</h3>
