@@ -9,19 +9,17 @@ export type SnakePositionType = { x: number; y: number; }[]
 export type FoodPositionType = { x: number; y: number; }
 
 export default function Game() {
-
-    // get the device width
-    // let width = window.innerWidth
-
-
-
-    // * Variables ----------------------------------------------------
-    // let totalGridSize = width > 300 ? 20 : 16;
-    let totalGridSize = 20;
-    console.log(totalGridSize)
+    // * Static Variables ----------------------------------------------------
     let speed = 320;
     let isGameOver = false
 
+    // * States -----------------------------------------------------------------------
+    const [score, setScore] = useState(0)
+    const [snakeDirection, setSnakeDirection] = useState<SnakeDirectionType>(undefined);
+    const [isMobile, setIsMobile] = useState(false)
+
+    // * Dynamic Variables ----------------------------------------------------
+    let totalGridSize = isMobile ? 16 : 20;
     const { highScore, updateHighScore } = useScoreStore()
     const { attempts, updateAttempts } = useAttemptsStore()
 
@@ -30,18 +28,16 @@ export default function Game() {
         { x: totalGridSize / 2 + 1, y: totalGridSize / 2 },
         { x: totalGridSize / 2 + 2, y: totalGridSize / 2 },
     ];
-
     let initialFoodPosition = {
         x: totalGridSize / 2 - 5,
         y: totalGridSize / 2,
     };
 
-
-    // * States -----------------------------------------------------------------------
-    const [score, setScore] = useState(0)
+    // * Dependent States -----------------------------------------------------------------------
     const [foodPosition, setFoodPosition] = useState<FoodPositionType>(initialFoodPosition);
     const [snakePosition, setSnakePosition] = useState<SnakePositionType>(initialSnakePosition);
-    const [snakeDirection, setSnakeDirection] = useState<SnakeDirectionType>(undefined);
+
+
 
     // ! Increase the snake speed according to current score ---------------------------
     if (score > 4) speed = speed - 40
@@ -228,6 +224,24 @@ export default function Game() {
         if (snakeDirection !== undefined) updateGame()
     }, [snakeDirection]);
 
+    // * to check for 
+    useEffect(() => {
+        function handleResize() {
+            if (window.innerWidth <= 768) {
+                setIsMobile(true);
+            } else {
+                setIsMobile(false);
+            }
+        }
+
+        window.addEventListener('resize', handleResize);
+        handleResize();
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
     return (
         <div className="flex flex-col md:flex-row items-start justify-between gap-4 text-gray-300 font-medium text-normal w-full h-full md:px-8 pt-16">
 
@@ -245,6 +259,8 @@ export default function Game() {
             </div>
 
             <div className="h-full flex-1 bg-gray-700 rounded-lg p-4 flex flex-col justify-center items-start">
+                <span className="w-10 h-10 bg-red-500">{isMobile ? 'mobile' : 'not mobile'}</span>
+                {/* <div className="h-full flex-1 bg-gray-700 rounded-lg p-4 flex flex-col justify-center items-start"> */}
                 <div>Score: <span className="text-lg font-extrabold text-white/60">{score}</span></div>
 
                 <div className="h-44 w-44 relative bg-orange-300">
