@@ -110,7 +110,7 @@ export default function Game() {
 
                 let cell = <div className={className} key={`${row}+${col}`} >
                     {isSnakeHeadHere ? (
-                        <svg className="h-[20px] w-[20px] sm:h-[30px] sm:w-[30px]" width="30" height="30" viewBox="0 0 238 238" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg className="h-[20px] w-[20px] sm:h-[25px] lg:h-[30px] sm:w-[25px] lg:w-[30px] " width="30" height="30" viewBox="0 0 238 238" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M0.500008 79.5V197.5C0.500005 217.5 26 237.5 48.5 237.5H189.5C212.5 237.5 237.5 217.5 237.5 197V79.5C237.5 59.5 181.5 0.500008 158.5 0.500008H79.5C56.5 0.500008 0.500008 59.5 0.500008 79.5Z" fill="#D93232" stroke="#C95151" />
                             <circle cx="158" cy="78" r="18" fill="#D9D9D9" />
                             <circle cx="80" cy="78" r="18" fill="#D9D9D9" />
@@ -226,10 +226,10 @@ export default function Game() {
         if (snakeDirection !== undefined) updateGame()
     }, [snakeDirection]);
 
-    // * to check for 
+    // * to check for if the device is mobile or desktop
     useEffect(() => {
         function handleResize() {
-            if (window.innerWidth <= 767) {
+            if (window.innerWidth <= 1025) {
                 setIsMobile(true);
             } else {
                 setIsMobile(false);
@@ -245,71 +245,113 @@ export default function Game() {
     }, []);
 
     return (
-        <div className="flex flex-col max-w-7xl xl:flex-row-reverse items-start justify-between gap-4 font-medium text-base xl:text-lg text-slate-500 w-full h-full sm:px-8 pt-4 xl:pt-10">
-
-            {/* score & stats */}
-            <div className="flex justify-center items-center lg:items-start gap-4 xl:flex-col mx-auto">
-
-                <div className="h-[100px] lg:h-[125px] w-[164px] sm:w-[242px] md:w-[310px] bg-gray-700 rounded-lg px-4 flex flex-col justify-start items-start">
-                    <Heading text="Live Score" />
-                    <span>Score: <span className="text-white/60">{score}</span></span>
-                </div>
-
-                <div className="h-[100px] lg:h-[125px] w-[164px] sm:w-[242px] md:w-[310px] bg-gray-700 rounded-lg px-4 flex flex-col ">
-                    <Heading text="Statistics" />
-                    <div>High Score: <span className="  text-white/60"> {highScore}</span></div>
-                    <div>Attempts: <span className=" text-white/60">{attempts}</span></div>
-                </div>
-
-            </div>
-
-
-            {/* Snake Board */}
-            <div className="flex-1 flex justify-center xl:justify-end items-center mx-auto">
-
-                <div className="grid Grid_Custom_Classes gap-[0.5px] md:gap-[1px] border-[6px] border-gray-700/75 p-[0.5px] rounded-xl">
-                    {RenderGrid()}
-                </div>
-
-            </div>
-
-            <div className="md:hidden h-52 w-52 mx-auto flex-1 bg-gray-700 rounded-lg flex flex-col p-2">
-
-                <div className="h-52 w-5h-52 flex flex-col justify-between items-center">
-                    <div className="flex-1 w-full h-full flex justify-center items-center">
-                        <button
-                            className="bg-slate-300/60 h-16 w-16 active:bg-slate-300/75 rounded-full flex justify-center items-center"
-                            onClick={() => buttonControl('Up')}
-                        >
-                            <Image alt="arrow" src={'/arrow-right.png'} height={40} width={40} className="-rotate-90" />
-                        </button>
-                    </div>
-                    <div className="flex-1 w-full h-full flex justify-between items-center">
-                        <button
-                            className=" bg-slate-300/60 h-16 w-16 active:bg-slate-300/75 rounded-full flex justify-center items-center"
-                            onClick={() => buttonControl('Left')}
-                        >
-                            <Image alt="arrow" src={'/arrow-right.png'} height={40} width={40} className="rotate-180" />
-                        </button>
-                        <button
-                            className="bg-slate-300/60 h-16 w-16 active:bg-slate-300/75 rounded-full flex justify-center items-center"
-                            onClick={() => buttonControl('Right')}
-                        >
-                            <Image alt="arrow" src={'/arrow-right.png'} height={40} width={40} />
-
-                        </button>
-                    </div>
-                    <div className="flex-1 w-full h-full flex justify-center items-center">
-                        <button
-                            className="bg-slate-300/60 h-16 w-16 active:bg-slate-300/75 rounded-full flex justify-center items-center"
-                            onClick={() => buttonControl('Down')}
-                        >
-                            <Image alt="arrow" src={'/arrow-right.png'} height={40} width={40} className="rotate-90" />
-
-                        </button>
-                    </div>
+        <section className="max-w-7x">
+            {/* score & statistics */}
+            <div className="flex justify-between items-center w-[340px] sm:w-[420px] lg:w-[630px] sm:ml-8 text-sm  pt-4">
+                <span className="flex justify-center items-center px-2 sm:px-4 py-1 sm:py-2 bg-slate-700/40 text-gray-300 rounded-full">Score: {score}</span>
+                <div className="flex justify-center items-center gap-1 sm:gap-4">
+                    <span className="flex justify-center items-center px-2 sm:px-4 py-1 sm:py-2 bg-slate-700/40 text-gray-300 rounded-full">Highest Score: {highScore}</span>
+                    <span className="flex justify-center items-center px-2 sm:px-4 py-1 sm:py-2 bg-slate-700/40 text-gray-300 rounded-full">Total Played: {attempts}</span>
                 </div>
             </div>
-        </div>
+            <div className="flex flex-col xl:flex-row-reverse items-start justify-between gap-4 font-medium text-base xl:text-lg text-slate-500 w-full h-full sm:px-8 pt-2">
+
+                {/* Snake Board */}
+                <div className="flex-1 flex items-start mx-auto">
+
+                    <div className="grid Grid_Custom_Classes gap-[0.5px] md:gap-[1px] border-[6px] border-gray-700/75 p-[0.5px] rounded-xl">
+                        {RenderGrid()}
+                    </div>
+
+                    {/* Button Controls for desktop */}
+                    <div className={`hidden relative lg:flex ml-4 w-[340px] mx-auto flex-1 bg-gray-700/50 rounded-lg flex-col p-2`}>
+
+                        <div className="flex flex-col justify-between items-center">
+                            <div className="flex-1 w-full h-full flex justify-center items-center">
+                                <button
+                                    className="bg-slate-600/80 h-16 w-16 active:bg-slate-300/75 rounded-full flex justify-center items-center"
+                                    onClick={() => buttonControl('Up')}
+                                >
+                                    <Image alt="arrow" src={'/arrow-right.png'} height={40} width={40} className="-rotate-90" />
+                                </button>
+                            </div>
+                            <div className="flex-1 w-full h-full flex justify-between items-center">
+                                <button
+                                    className=" bg-slate-600/80 h-16 w-16 active:bg-slate-300/75 rounded-full flex justify-center items-center"
+                                    onClick={() => buttonControl('Left')}
+                                >
+                                    <Image alt="arrow" src={'/arrow-right.png'} height={40} width={40} className="rotate-180" />
+                                </button>
+                                <button
+                                    className="bg-slate-600/80 h-16 w-16 active:bg-slate-300/75 rounded-full flex justify-center items-center"
+                                    onClick={() => buttonControl('Right')}
+                                >
+                                    <Image alt="arrow" src={'/arrow-right.png'} height={40} width={40} />
+
+                                </button>
+                            </div>
+                            <div className="flex-1 w-full h-full flex justify-center items-center">
+                                <button
+                                    className="bg-slate-600/80 h-16 w-16 active:bg-slate-300/75 rounded-full flex justify-center items-center"
+                                    onClick={() => buttonControl('Down')}
+                                >
+                                    <Image alt="arrow" src={'/arrow-right.png'} height={40} width={40} className="rotate-90" />
+
+                                </button>
+                            </div>
+
+                            {/* how to play */}
+                            <div className="absolute top-[108%] bg-gray-700/50 w-[21.2rem] rounded-lg p-2 space-y-1">
+                                <h3 className="text-white/40 pb-1">How to play?</h3>
+                                <span className="text-sm line-clamp-3 ml-3">On Desktop, you can use your Arrow Keys to control the direction of the snake.</span>
+                                <hr className="w-[93%] mx-auto opacity-25" />
+                                <span className="text-sm line-clamp-3 ml-3">On Mobile Device, you can use the control keys to control the direction of the snake.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <span></span>
+                </div>
+
+                {/* Controls for mobile */}
+                <div className={`flex lg:hidden w-[340px] mx-auto flex-1 bg-gray-700/50 rounded-lg flex-col p-2`}>
+
+                    <div className="h-52 w-5h-52 flex flex-col justify-between items-center">
+                        <div className="flex-1 w-full h-full flex justify-center items-center">
+                            <button
+                                className="bg-slate-600/80 h-16 w-16 active:bg-slate-300/75 rounded-full flex justify-center items-center"
+                                onClick={() => buttonControl('Up')}
+                            >
+                                <Image alt="arrow" src={'/arrow-right.png'} height={40} width={40} className="-rotate-90" />
+                            </button>
+                        </div>
+                        <div className="flex-1 w-full h-full flex justify-between items-center">
+                            <button
+                                className=" bg-slate-600/80 h-16 w-16 active:bg-slate-300/75 rounded-full flex justify-center items-center"
+                                onClick={() => buttonControl('Left')}
+                            >
+                                <Image alt="arrow" src={'/arrow-right.png'} height={40} width={40} className="rotate-180" />
+                            </button>
+                            <button
+                                className="bg-slate-600/80 h-16 w-16 active:bg-slate-300/75 rounded-full flex justify-center items-center"
+                                onClick={() => buttonControl('Right')}
+                            >
+                                <Image alt="arrow" src={'/arrow-right.png'} height={40} width={40} />
+
+                            </button>
+                        </div>
+                        <div className="flex-1 w-full h-full flex justify-center items-center">
+                            <button
+                                className="bg-slate-600/80 h-16 w-16 active:bg-slate-300/75 rounded-full flex justify-center items-center"
+                                onClick={() => buttonControl('Down')}
+                            >
+                                <Image alt="arrow" src={'/arrow-right.png'} height={40} width={40} className="rotate-90" />
+
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     );
 }

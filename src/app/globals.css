@@ -11,13 +11,13 @@
 /* sm */
 @media (min-width: 640px) {
   .Grid_Custom_Classes {
-    grid-template-columns: repeat(16, 30px);
-    grid-template-rows: repeat(16, 30px);
+    grid-template-columns: repeat(16, 25px);
+    grid-template-rows: repeat(16, 25px);
   }
 }
 
-/* md */
-@media (min-width: 768px) {
+/* lg */
+@media (min-width: 1024px) {
   .Grid_Custom_Classes {
     grid-template-columns: repeat(20, 30px);
     grid-template-rows: repeat(20, 30px);
