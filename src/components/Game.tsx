@@ -247,7 +247,7 @@ export default function Game() {
     return (
         <section className="max-w-7x">
             {/* score & statistics */}
-            <div className="flex justify-between items-center w-[340px] sm:w-[420px] lg:w-[630px] sm:ml-8 text-sm  pt-4">
+            <div className="flex justify-between items-center w-[340px] sm:w-[420px] lg:w-[630px] sm:ml-8 text-sm pt-4">
                 <span className="flex justify-center items-center px-2 sm:px-4 py-1 sm:py-2 bg-slate-700/40 text-gray-300 rounded-full">Score: {score}</span>
                 <div className="flex justify-center items-center gap-1 sm:gap-4">
                     <span className="flex justify-center items-center px-2 sm:px-4 py-1 sm:py-2 bg-slate-700/40 text-gray-300 rounded-full">Highest Score: {highScore}</span>
@@ -309,8 +309,6 @@ export default function Game() {
                             </div>
                         </div>
                     </div>
-
-                    <span></span>
                 </div>
 
                 {/* Controls for mobile */}
@@ -337,7 +335,6 @@ export default function Game() {
                                 onClick={() => buttonControl('Right')}
                             >
                                 <Image alt="arrow" src={'/arrow-right.png'} height={40} width={40} />
-
                             </button>
                         </div>
                         <div className="flex-1 w-full h-full flex justify-center items-center">
@@ -346,7 +343,6 @@ export default function Game() {
                                 onClick={() => buttonControl('Down')}
                             >
                                 <Image alt="arrow" src={'/arrow-right.png'} height={40} width={40} className="rotate-90" />
-
                             </button>
                         </div>
                     </div>
