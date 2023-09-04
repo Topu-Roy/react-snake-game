@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useScoreStore, useAttemptsStore } from "@/zustand/useZustandStore";
 import Heading from "./Heading";
+import Image from "next/image";
 
 //* type for this component
 type SnakeDirectionType = "Left" | "Right" | "Up" | "Down" | undefined;
@@ -272,36 +273,41 @@ export default function Game() {
 
             </div>
 
-            <div className="md:hidden h-full mx-auto flex-1 bg-gray-700 rounded-lg px-4 flex flex-col justify-center items-start">
+            <div className="md:hidden h-52 w-52 mx-auto flex-1 bg-gray-700 rounded-lg flex flex-col p-2">
 
-                <div className=" h-44 w-44 relative bg-orange-300">
-                    <button
-                        className="p-1 h-6 bg-slate-800 text-white flex absolute justify-center items-center top-[50%] bottom-[50%] left-0"
-                        onClick={() => buttonControl('Left')}
-                    >
-                        Left
-                    </button>
+                <div className="h-52 w-5h-52 flex flex-col justify-between items-center">
+                    <div className="flex-1 w-full h-full flex justify-center items-center">
+                        <button
+                            className="bg-slate-300/60 h-16 w-16 active:bg-slate-300/75 rounded-full flex justify-center items-center"
+                            onClick={() => buttonControl('Up')}
+                        >
+                            <Image alt="arrow" src={'/arrow-right.png'} height={40} width={40} className="-rotate-90" />
+                        </button>
+                    </div>
+                    <div className="flex-1 w-full h-full flex justify-between items-center">
+                        <button
+                            className=" bg-slate-300/60 h-16 w-16 active:bg-slate-300/75 rounded-full flex justify-center items-center"
+                            onClick={() => buttonControl('Left')}
+                        >
+                            <Image alt="arrow" src={'/arrow-right.png'} height={40} width={40} className="rotate-180" />
+                        </button>
+                        <button
+                            className="bg-slate-300/60 h-16 w-16 active:bg-slate-300/75 rounded-full flex justify-center items-center"
+                            onClick={() => buttonControl('Right')}
+                        >
+                            <Image alt="arrow" src={'/arrow-right.png'} height={40} width={40} />
 
-                    <button
-                        className="p-1 h-6 bg-slate-800 text-white flex absolute justify-center items-center top-0 left-[50%] right-[50%]"
-                        onClick={() => buttonControl('Up')}
-                    >
-                        top
-                    </button>
+                        </button>
+                    </div>
+                    <div className="flex-1 w-full h-full flex justify-center items-center">
+                        <button
+                            className="bg-slate-300/60 h-16 w-16 active:bg-slate-300/75 rounded-full flex justify-center items-center"
+                            onClick={() => buttonControl('Down')}
+                        >
+                            <Image alt="arrow" src={'/arrow-right.png'} height={40} width={40} className="rotate-90" />
 
-                    <button
-                        className="p-1 h-6 bg-slate-800 text-white flex absolute justify-center items-center top-[50%] bottom-[50%] right-0"
-                        onClick={() => buttonControl('Right')}
-                    >
-                        right
-                    </button>
-
-                    <button
-                        className="p-1 h-6 bg-slate-800 text-white flex absolute justify-center items-center bottom-0 left-[50%] right-[50%]"
-                        onClick={() => buttonControl('Down')}
-                    >
-                        bottom
-                    </button>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
