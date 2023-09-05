@@ -1,16 +1,16 @@
+import SkillCategory from '@/components/SkillCategory';
 import Image from 'next/image'
 import React from 'react'
 
-type TechObjType = {
+export type TechObjType = {
     name: string;
     image: string;
 }[]
 
-//! 
 const mainFrameworks: TechObjType = [
     {
         name: 'NextJS',
-        image: ''
+        image: '/tech/next.svg'
     },
     {
         name: 'ExpressJS',
@@ -56,10 +56,9 @@ const misc: TechObjType = [
     },
     {
         name: 'React Hook Forms',
-        image: 'react-hook-forms.png'
+        image: '/tech/react-hook-forms.png'
     },
 
-    //! -------------------------------------- 
     {
         name: 'Zustand',
         image: ''
@@ -108,7 +107,7 @@ const coreTechnologies: TechObjType = [
     },
     {
         name: 'NodeJS',
-        image: '/tech/nodejs.png'
+        image: '/tech/nodejs.jpg'
     },
     {
         name: 'Git',
@@ -127,52 +126,50 @@ const coreTechnologies: TechObjType = [
         image: '/tech/mongodb.png'
     }
 ]
-
-//! ------------------
 const interestedToLearn: TechObjType = [
     {
-        name: 'Go',
-        image: ''
+        name: 'GoLang',
+        image: '/tech/go.png'
     },
     {
         name: 'React Native',
-        image: ''
+        image: '/tech/react-native.png'
     },
     {
         name: 'PostgreSQL',
-        image: ''
+        image: '/tech/postgresql.png'
     },
     {
         name: 'Rust',
-        image: ''
+        image: '/tech/rust.png'
     },
     {
         name: 'SveltKit',
-        image: ''
+        image: '/tech/svelt.png'
     },
     {
         name: 'Linux',
-        image: ''
+        image: '/tech/linux.png'
     },
     {
         name: 'Machine Learning',
-        image: ''
+        image: '/tech/ml.png'
     },
     {
         name: 'Artificial Intelligence',
-        image: ''
+        image: '/tech/ai.jpg'
     }
 ]
-const OperatingSystem: TechObjType = [
+const operatingSystem: TechObjType = [
     {
         name: 'Windows 11 Pro',
-        image: '/windows11.png'
+        image: '/tech/windows11.png'
     }
 ]
 const textEditor: TechObjType = [
     {
         name: 'Visual Studio Code',
-        image: 'vscode.png'
+        image: '/tech/vscode.png'
     }
 ]
 
@@ -180,12 +177,24 @@ const textEditor: TechObjType = [
 function AboutPage() {
     return (
         <>
-            <section className='max-w-7xl flex justify-between items-center mx-auto mt-8'>
-                <div className="w-full p-4">
+            <section className='max-w-7xl bg-slate-400/20 rounded-xl flex justify-between items-center mx-auto my-8'>
+                <div className="w-full flex-1 p-4">
                     <Image src={'/topu.jpg'} alt='topu roy' height={1080} width={1080} className='rounded-lg drop-shadow-xl filter grayscale hover:grayscale-0 transition-all duration-200' />
                 </div>
-                <div className="bg-yellow-200 w-full"></div>
+                <div className="bg-yellow-200 flex-1 w-full">
+                    <div className='w-[50rem]'></div>
+                </div>
             </section>
+            <div className="max-w-7xl mx-auto w-full">
+                <SkillCategory object={mainFrameworks} title='Frameworks' />
+                <SkillCategory object={styling} title='Styling' />
+                <SkillCategory object={uiux} title='UI/UX' />
+                <SkillCategory object={misc} title='Misc' />
+                <SkillCategory object={coreTechnologies} title='Core Technologies' />
+                <SkillCategory object={interestedToLearn} title='Interested To Learn' />
+                <SkillCategory object={textEditor} title='Text Editor' />
+                <SkillCategory object={operatingSystem} title='Operating System' />
+            </div>
         </>
     )
 }
