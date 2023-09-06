@@ -10,7 +10,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model feetback {
+model feedback {
   id      String   @id @default(auto()) @map("_id") @db.ObjectId
   email   String
   message String
