@@ -13,7 +13,7 @@ export const mainFrameworks: TechObjType = [
     image: "/tech/express.png",
   },
 ];
-export const styling: TechObjType = [
+export const stylingAndUIUX: TechObjType = [
   {
     name: "TailwindCSS",
     image: "/tech/tailwindcss.png",
@@ -22,8 +22,6 @@ export const styling: TechObjType = [
     name: "Shadcn/UI",
     image: "/tech/shadcn-ui.png",
   },
-];
-export const uiux: TechObjType = [
   {
     name: "Figma",
     image: "/tech/figma.png",
@@ -156,13 +154,11 @@ export const interestedToLearn: TechObjType = [
     image: "/tech/ai.jpg",
   },
 ];
-export const operatingSystem: TechObjType = [
+export const others: TechObjType = [
   {
     name: "Windows 11 Pro",
     image: "/tech/windows11.jpg",
   },
-];
-export const textEditor: TechObjType = [
   {
     name: "Visual Studio Code",
     image: "/tech/vscode.png",
