@@ -61,7 +61,7 @@ const misc: TechObjType = [
 
     {
         name: 'Zustand',
-        image: ''
+        image: '/tech/zustand.png'
     },
     {
         name: 'ChatGPT',
@@ -69,11 +69,11 @@ const misc: TechObjType = [
     },
     {
         name: 'TenStack Query',
-        image: '/tech/tenstack-query.png'
+        image: '/tech/tenstack-query.webp'
     },
     {
         name: 'Prisma',
-        image: '/tech/prisma.png'
+        image: '/tech/prisma.webp'
     },
     {
         name: 'Drizzle',
@@ -144,8 +144,8 @@ const interestedToLearn: TechObjType = [
         image: '/tech/rust.png'
     },
     {
-        name: 'SveltKit',
-        image: '/tech/svelt.png'
+        name: 'SvelteKit',
+        image: '/tech/svelte.jpg'
     },
     {
         name: 'Linux',
@@ -163,7 +163,7 @@ const interestedToLearn: TechObjType = [
 const operatingSystem: TechObjType = [
     {
         name: 'Windows 11 Pro',
-        image: '/tech/windows11.png'
+        image: '/tech/windows11.jpg'
     }
 ]
 const textEditor: TechObjType = [
