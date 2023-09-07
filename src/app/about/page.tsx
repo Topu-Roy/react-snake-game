@@ -18,7 +18,7 @@ function AboutPage() {
                     <AboutText />
                 </div>
             </section>
-            <div className="max-w-7xl mx-auto w-full pt-20">
+            <div className="max-w-7xl mx-auto w-full py-20">
 
                 <h3 className="text-3xl text-slate-200 font-bold">Technologies I Know & Love</h3>
                 <SkillCategory object={coreTechnologies} title='Core Technologies' />
