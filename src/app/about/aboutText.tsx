@@ -34,7 +34,7 @@ export default function AboutText() {
                     'What I Do:'
                 }
                 text={
-                    "I make great web apps using new technology. I make sure my clients get their money's worth. I work hard to make sure my work is the best it can be. This makes my clients happy and earns their trust."
+                    "I make great web apps using new technology. I make sure my clients get their money's worth and work hard to make sure my work is the best it can be. This makes my clients happy and earns their trust."
                 }
             />
             <TextSection
@@ -42,7 +42,7 @@ export default function AboutText() {
                     'Benefits:'
                 }
                 text={
-                    "I am skilled and friendly to clients. I always make sure that my clients are satisfied and happy with my work. I work hard to exceed their expectations and produce high-quality results. I am dedicated to delivering excellence in every project."
+                    "I am skilled and friendly to clients. I always make sure that my clients are satisfied and happy with my work. I work hard to exceed their expectations and produce high-quality results."
                 }
             />
             <TextSection
