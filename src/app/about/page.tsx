@@ -4,19 +4,22 @@ import React from 'react'
 import { coreTechnologies, interestedToLearn, mainFrameworks, misc, others, stylingAndUIUX } from './objects';
 import AboutText from './aboutText';
 import AboutThisProject from './aboutThisProject';
+import AboutTextForMobile from './aboutTextForMobile';
 
 function AboutPage() {
     return (
         <>
             <h3 className="max-w-7xl text-slate-200/75 font-bold text-3xl text-center mt-8 mx-auto">
-                Hey there👋!...<span className='ml-4 w-full'>I'm Topu Roy</span>
+                Hey there👋!<span className='ml-4 w-full'><br /> I'm Topu Roy</span>
             </h3>
-            <section className='max-w-7xl bg-slate-400/20 rounded-xl flex justify-between items-start mx-auto my-8'>
-                <div className="w-full flex-1 p-4">
+
+            <section className='max-w-7xl bg-slate-400/20 rounded-xl flex flex-col md:flex-row justify-between items-start mx-auto my-8'>
+                <div className="w-full flex-1 p-2 md:p-4">
                     <Image src={'/topu.jpg'} alt='topu roy' height={1080} width={1080} className='rounded-lg drop-shadow-xl filter grayscale hover:grayscale-0 transition-all duration-200' />
                 </div>
-                <div className="flex-1 w-full my-4 mr-4 space-y-2">
-                    <AboutText />
+                <div className="flex-1 w-full my-4 px-2 md:mr-4 space-y-2">
+                    <div className='hidden md:block'><AboutText /></div>
+                    <div className='md:hidden'><AboutTextForMobile /></div>
                 </div>
             </section>
 
