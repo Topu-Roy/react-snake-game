@@ -1,6 +1,6 @@
 import React from 'react'
 import { usedInThisProject } from './objects'
-import TechCard from '@/components/TechCard'
+import TechCard from '@/app/about/TechCard'
 import Image from 'next/image'
 
 export default function AboutThisProject() {
@@ -16,9 +16,9 @@ export default function AboutThisProject() {
 
                 {/* * Techs */}
                 <span className="text-xl text-slate-200/70 font-bold">Technologies used:</span>
-                <div className="flex items-center flex-wrap">
+                <div className="flex items-center flex-wrap gap-1">
                     {usedInThisProject.map(item => (
-                        <div key={item.name} className='py-4 px-2 text-white/60 rounded-xl w-[5.5rem] h-[8.5rem] sm:w-[8.5rem] sm:h-[11rem] flex flex-col gap-2 items-center'>
+                        <div key={item.name} className='py-4 px-2 text-white/60 w-[5.5rem] h-[8.5rem] sm:w-[7.3rem] sm:h-[11rem] flex flex-col gap-2 items-center'>
                             <div className='flex justify-between bg-slate-500/40 rounded-full items-center'>
                                 <Image src={item.image} alt='' height={90} width={90} className='p-2 aspect-square rounded-full' />
                             </div>
