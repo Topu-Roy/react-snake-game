@@ -10,8 +10,8 @@ export default function AboutThisProject() {
             <div className="w-full bg-white/10 rounded-xl p-2 md:p-4">
 
                 <span className="text-xl text-slate-200/70 font-bold pb-4">About:</span>
-                <p className='mb-6'>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione a facilis dicta eum sit quis suscipit temporibus, sequi optio sapiente voluptate voluptas nisi maxime excepturi voluptates rem cumque facere libero, minima inventore ut. Tempora odio ipsam animi ducimus, consequatur nobis nihil numquam, assumenda officiis itaque voluptatem eos obcaecati quaerat eligendi veritatis. Modi dolor, expedita quas aperiam commodi quibusdam sit odit impedit! Consequuntur aliquid est in magnam neque minima hic qui expedita corporis unde debitis reiciendis labore assumenda, porro molestias alias.
+                <p className='mb-6 mt-3'>
+                    I made a game using Next.js that combines old and new technology to learn and improve my skills. I worked on both the front and back ends, using Next.js for speed, TypeScript for typing, and Tailwind CSS for styling. On the back end, I used Prisma for databases, MongoDB for NoSQL, Zustand for state management, and Zod for schema validation. This project helped me improve my skills, solve problems, and learn new things. It shows my dedication to learning and pushing boundaries in the world of development.
                 </p>
 
                 {/* * Techs */}
