@@ -174,7 +174,7 @@ export const usedInThisProject: TechObjType = [
     image: "/tech/typescript.png",
   },
   {
-    name: "Tailwind CSS",
+    name: "TailwindCSS",
     image: "/tech/tailwindcss.png",
   },
   {

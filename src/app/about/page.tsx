@@ -5,6 +5,7 @@ import { coreTechnologies, interestedToLearn, mainFrameworks, misc, others, styl
 import AboutText from './aboutText';
 import AboutThisProject from './aboutThisProject';
 import AboutTextForMobile from './aboutTextForMobile';
+import Footer from '@/components/Footer';
 
 function AboutPage() {
     return (
@@ -37,6 +38,7 @@ function AboutPage() {
                 <h3 className="text-3xl text-slate-200 font-bold pt-20">Technologies I Want To Learn</h3>
                 <SkillCategory object={interestedToLearn} title='Interested To Learn' />
             </div>
+            <Footer position='nofixed' />
         </>
     )
 }

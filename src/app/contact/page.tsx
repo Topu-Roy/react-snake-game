@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { socialLinks } from "./Constants";
 import ContactForm from "./contactForm";
+import Footer from "@/components/Footer";
 
 function ContactPage() {
     return (
@@ -48,6 +49,7 @@ function ContactPage() {
                     ))}
                 </div>
             </div >
+            <Footer position="fixed" />
         </>
     );
 }
