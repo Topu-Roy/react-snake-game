@@ -254,10 +254,10 @@ export default function Game() {
                     <span className="flex justify-center items-center px-2 sm:px-4 py-1 sm:py-2 bg-slate-700/40 text-gray-300 rounded-full">Total Played: {attempts}</span>
                 </div>
             </div>
-            <div className="flex flex-col xl:flex-row-reverse items-start justify-between gap-4 font-medium text-base xl:text-lg text-slate-500 w-full h-full sm:px-8 pt-2">
+            <div className="flex flex-col xl:flex-row-reverse items-start justify-start lg:justify-between gap-4 font-medium text-base xl:text-lg text-slate-500 w-full sm:px-8 pt-2">
 
                 {/* Snake Board */}
-                <div className="flex-1 flex items-start mx-auto">
+                <div className="lg:flex-1  flex items-start mx-auto">
 
                     <div className="grid Grid_Custom_Classes gap-[0.5px] md:gap-[1px] border-[6px] border-gray-700/75 p-[0.5px] rounded-xl">
                         {RenderGrid()}
@@ -312,37 +312,37 @@ export default function Game() {
                 </div>
 
                 {/* Controls for mobile */}
-                <div className={`flex lg:hidden w-[340px] mx-auto flex-1 bg-gray-700/50 rounded-lg flex-col p-2`}>
+                <div className={`flex lg:hidden w-[340px] mx-auto bg-gray-700/50 rounded-lg flex-col p-2`}>
 
-                    <div className="h-52 w-5h-52 flex flex-col justify-between items-center">
+                    <div className="w-52 mx-auto flex flex-col justify-between items-center">
                         <div className="flex-1 w-full h-full flex justify-center items-center">
                             <button
-                                className="bg-slate-600/80 h-16 w-16 active:bg-slate-300/75 rounded-full flex justify-center items-center"
+                                className="bg-slate-600/80 h-12 w-12 active:bg-slate-300/75 rounded-full flex justify-center items-center"
                                 onClick={() => buttonControl('Up')}
                             >
-                                <Image alt="arrow" src={'/arrow-right.png'} height={40} width={40} className="-rotate-90" />
+                                <Image alt="arrow" src={'/arrow-right.png'} height={30} width={30} className="-rotate-90" />
                             </button>
                         </div>
                         <div className="flex-1 w-full h-full flex justify-between items-center">
                             <button
-                                className=" bg-slate-600/80 h-16 w-16 active:bg-slate-300/75 rounded-full flex justify-center items-center"
+                                className=" bg-slate-600/80 h-12 w-12 active:bg-slate-300/75 rounded-full flex justify-center items-center"
                                 onClick={() => buttonControl('Left')}
                             >
-                                <Image alt="arrow" src={'/arrow-right.png'} height={40} width={40} className="rotate-180" />
+                                <Image alt="arrow" src={'/arrow-right.png'} height={30} width={30} className="rotate-180" />
                             </button>
                             <button
-                                className="bg-slate-600/80 h-16 w-16 active:bg-slate-300/75 rounded-full flex justify-center items-center"
+                                className="bg-slate-600/80 h-12 w-12 active:bg-slate-300/75 rounded-full flex justify-center items-center"
                                 onClick={() => buttonControl('Right')}
                             >
-                                <Image alt="arrow" src={'/arrow-right.png'} height={40} width={40} />
+                                <Image alt="arrow" src={'/arrow-right.png'} height={30} width={30} />
                             </button>
                         </div>
                         <div className="flex-1 w-full h-full flex justify-center items-center">
                             <button
-                                className="bg-slate-600/80 h-16 w-16 active:bg-slate-300/75 rounded-full flex justify-center items-center"
+                                className="bg-slate-600/80 h-12 w-12 active:bg-slate-300/75 rounded-full flex justify-center items-center"
                                 onClick={() => buttonControl('Down')}
                             >
-                                <Image alt="arrow" src={'/arrow-right.png'} height={40} width={40} className="rotate-90" />
+                                <Image alt="arrow" src={'/arrow-right.png'} height={30} width={30} className="rotate-90" />
                             </button>
                         </div>
                     </div>
