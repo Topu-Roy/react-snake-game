@@ -25,7 +25,7 @@ function AboutPage() {
 
             <AboutThisProject />
 
-            <div className="max-w-7xl mx-auto w-full py-20 space-y-4">
+            <div className="max-w-7xl mx-auto w-full py-20 px-2 space-y-4">
 
                 <h3 className="text-3xl text-slate-200 font-bold pb-8">Technologies I Know & Love</h3>
                 <SkillCategory object={coreTechnologies} title='Core Technologies' />
