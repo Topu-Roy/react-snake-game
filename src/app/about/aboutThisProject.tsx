@@ -1,6 +1,4 @@
-import React from 'react'
 import { usedInThisProject } from './objects'
-import TechCard from '@/app/about/TechCard'
 import Image from 'next/image'
 
 export default function AboutThisProject() {
