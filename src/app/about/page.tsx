@@ -3,6 +3,7 @@ import Image from 'next/image'
 import React from 'react'
 import { coreTechnologies, interestedToLearn, mainFrameworks, misc, others, stylingAndUIUX } from './objects';
 import AboutText from './aboutText';
+import AboutThisProject from './aboutThisProject';
 
 function AboutPage() {
     return (
@@ -18,9 +19,12 @@ function AboutPage() {
                     <AboutText />
                 </div>
             </section>
-            <div className="max-w-7xl mx-auto w-full py-20">
 
-                <h3 className="text-3xl text-slate-200 font-bold">Technologies I Know & Love</h3>
+            <AboutThisProject />
+
+            <div className="max-w-7xl mx-auto w-full py-20 space-y-4">
+
+                <h3 className="text-3xl text-slate-200 font-bold pb-8">Technologies I Know & Love</h3>
                 <SkillCategory object={coreTechnologies} title='Core Technologies' />
                 <SkillCategory object={mainFrameworks} title='Frameworks' />
                 <SkillCategory object={stylingAndUIUX} title='Styling And UI/UX' />

@@ -164,3 +164,37 @@ export const others: TechObjType = [
     image: "/tech/vscode.png",
   },
 ];
+export const usedInThisProject: TechObjType = [
+  {
+    name: "Next.js",
+    image: "/tech/next.svg",
+  },
+  {
+    name: "TypeScript",
+    image: "/tech/typescript.png",
+  },
+  {
+    name: "Tailwind CSS",
+    image: "/tech/tailwindcss.png",
+  },
+  {
+    name: "Prisma",
+    image: "/tech/prisma.webp",
+  },
+  {
+    name: "MongoDB",
+    image: "/tech/mongodb.png",
+  },
+  {
+    name: "Zustand",
+    image: "/tech/zustand.png",
+  },
+  {
+    name: "Zod",
+    image: "/tech/zod.png",
+  },
+  {
+    name: "React Hook Forms",
+    image: "/tech/react-hook-forms.png",
+  },
+];
