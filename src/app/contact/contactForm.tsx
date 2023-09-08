@@ -69,18 +69,18 @@ function ContactForm() {
     }, [submitted]);
 
     return (
-        <div className="flex flex-col">
-            <h2 className="text-2xl font-semibold w-full pb-4">Leave a message</h2>
+        <div className="flex md:w-full flex-1 flex-col">
+            <h2 className="text-xl text-white/70 sm:text-2xl font-semibold w-full text-center md:text-start pb-4">Leave a message</h2>
             <form
                 onSubmit={handleSubmit(onSubmit)}
-                className="max-w-7xl flex flex-col mx-auto space-y-2 ring-2 p-4 rounded-md"
+                className="max-w-7xl w-full flex flex-col mx-auto space-y-2 ring-2 p-2 sm:p-4 rounded-md"
             >
                 <span>Your email address:</span>
                 <input
                     {...register("email", {
                         required: "Email is required",
                     })}
-                    className={`w-[25rem] h-[4rem] px-2 py-1 rounded-lg bg-slate-600/40 text-white/70 ${errors.email && "ring-2 ring-red-500/90"
+                    className={`w-full h-[4rem] px-2 py-1 rounded-lg bg-slate-600/40 text-white/70 ${errors.email && "ring-2 ring-red-500/90"
                         }`}
                     type="email"
                 />
@@ -91,7 +91,7 @@ function ContactForm() {
                     Please give a valid email address
                 </span>
                 <span>Your Message:</span>
-                <div className="w-[25rem] h-[15rem]">
+                <div className="w-full h-[15rem]">
                     <textarea
                         {...register("message", {
                             required: "Email is required",

@@ -6,25 +6,25 @@ function ContactPage() {
     return (
         <>
             {/* Headline */}
-            <h3 className="max-w-7xl text-slate-200/75 font-bold text-4xl text-center mt-8 mx-auto">
+            <h3 className="max-w-7xl text-slate-200/75 font-bold text-2xl sm:text-4xl text-center mt-8 mx-auto">
                 Let's Get In Touch 🎉
             </h3>
 
             {/* Main Section */}
-            <div className="text-white/80 max-h-screen max-w-7xl py-8 mx-auto flex justify-center items-start gap-8">
+            <div className="text-white/80 max-w-7xl py-8 mx-auto flex flex-col md:flex-row justify-center items-center md:items-start gap-2 lg:gap-4 xl:gap-8 md:px-2">
                 {/* Contact Form */}
-                <div className="flex flex-col">
+                <div className="w-[94%] sm:w-[30rem] md:w-[30rem] md:flex justify-center items-center flex-col">
                     <ContactForm />
                 </div>
 
-                <div className="flex flex-col justify-between items-start">
-                    <h2 className="text-2xl font-semibold w-full pb-4">
+                <div className="flex w-full md:w-[20rem] flex-col justify-between items-center sm:items-start">
+                    <h2 className="text-2xl text-white/70 font-semibold w-full pb-4 text-center md:text-left">
                         Or, Contact me on
                     </h2>
 
                     {socialLinks.map((item) => (
-                        <a href={item.link} target="_blank">
-                            <button className="w-[15rem] flex justify-between px-8 items-center py-2 bg-gray-500/60 rounded-lg mb-2 gap-4 hover:bg-gray-500/50">
+                        <a href={item.link} className="w-[94%] sm:w-[30rem] md:w-full mx-auto md:m-0 lg:w-[15rem]" target="_blank">
+                            <button className="w-full flex justify-between px-8 items-center py-2 bg-gray-500/60 rounded-lg mb-2 gap-4 hover:bg-gray-500/50">
 
                                 <Image
                                     src={item.image}
