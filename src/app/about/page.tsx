@@ -1,6 +1,5 @@
 import SkillCategory from '@/app/about/SkillCategory';
 import Image from 'next/image'
-import React from 'react'
 import { coreTechnologies, interestedToLearn, mainFrameworks, misc, others, stylingAndUIUX } from './objects';
 import AboutText from './aboutText';
 import AboutThisProject from './aboutThisProject';
@@ -10,8 +9,12 @@ import Footer from '@/components/Footer';
 function AboutPage() {
     return (
         <>
-            <h3 className="max-w-7xl text-slate-200/75 font-bold text-3xl text-center mt-8 mx-auto">
-                Hey there👋!<span className='ml-4 w-full'><br /> I'm Topu Roy</span>
+            <h3 className="max-w-7xl hidden md:block text-slate-200/75 font-bold text-3xl text-center mt-8 mx-auto">
+                Hey there👋!...<span className='ml-4 w-full'>I'm Topu Roy</span>
+            </h3>
+            {/* on mobile */}
+            <h3 className="max-w-7xl md:hidden text-slate-200/75 font-bold text-3xl text-center mt-8 mx-auto">
+                Hey there👋!<span className='ml-4 w-full'><br className='md:hidden' /> I'm Topu Roy</span>
             </h3>
 
             <section className='max-w-7xl bg-slate-400/20 rounded-xl flex flex-col lg:flex-row justify-between items-start mx-auto my-8'>
